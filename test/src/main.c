@@ -6,12 +6,13 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 14:20:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/22 19:13:19 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/03/24 22:36:06 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libavl-internal.h>
 #include <get_next_line.h>
+#include <libft.h>
 
 static int		result[4096] = {0};
 static size_t	a = 0;

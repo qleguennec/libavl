@@ -83,7 +83,7 @@ test:
 	@test/test-functions-used.sh
 
 rendu:
-	@util/rendu.sh
+	@MAKE="all fclean" util/rendu.sh
 
 purge:
 	@util/purge.sh

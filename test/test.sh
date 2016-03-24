@@ -1,6 +1,11 @@
 #!/bin/bash
 
-. util/rendu.sh
+RENDU_DIR=$(pwd)/test/lib/libavl . util/rendu.sh
+make -C test
+if [ "$?" -ne 0 ]; then
+	exit 1
+fi
+cd test
 
 NINPUTS=(1 10 42 100 1000 10000)
 MAX=40000
@@ -23,13 +28,13 @@ echo -e "$INFO"Sort tests$END
 echo
 for N in ${NINPUTS[@]}; do
 	echo -e "$INFO"Testing for $N integers$END
-	RAND=$(shuf -i1-$MAX -n $N)
-	MY=$(echo $RAND | ./test-avl sort)
-	SORT=$(echo $RAND | sort -n)
+	RAND="$(shuf -i1-$MAX -n $N)"
+	MY=$(echo "$RAND" | ./test-avl sort)
+	SORT=$(echo "$RAND" | sort -n)
 	if [ ! "$MY" = "$SORT" ]; then
-		echo -e "$NOK"NOK"$END" For input: $BLUE$(echo $RAND | tr '\n' ' ')$END
-		echo -e "$NOK"Got output:$END
-		printf $MY
+		echo -e "$NOK"input: "\t"$BLUE$RAND$END
+		echo -e "$NOK"output:"\t"$END$MY
+		echo -e "$OK"answer:"\t"$SORT$END
 		exit 1
 	else
 		echo -e "$OK"OK$END

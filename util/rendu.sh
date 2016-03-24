@@ -5,18 +5,15 @@ if [ -z "$RENDU_DIR" ]; then
 fi
 
 if [ -d "$RENDU_DIR" ]; then
-	make -C $RENDU_DIR fclean
-	rm -rf $RENDU_DIR/build
-else
-	mkdir -p $RENDU_DIR
-	CPY=(auteur includes src Makefile)
-
-	for DIR in ${CPY[@]}; do
-		cp -r $DIR $RENDU_DIR
-	done
+	rm -rf $RENDU_DIR
 fi
 
-cd $RENDU_DIR
-make
+mkdir -p $RENDU_DIR
+CPY=(auteur includes src Makefile)
 
+for DIR in ${CPY[@]}; do
+	cp -r $DIR $RENDU_DIR
+done
+
+[ -n "$MAKE" ] && make -C $RENDU_DIR $MAKE
 ls -la $RENDU_DIR
