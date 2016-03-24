@@ -1,17 +1,17 @@
 # Directories
-BINDIR		=	.
+BINDIR		?=	.
 SRCDIR		=	src
-BUILDDIR	=	build
-TESTDIR		=	../
+BUILDDIR	?=	build
+LIBDIR		?=	lib
 INCLUDE		+=	includes
-INCLUDE		+=	$(addprefix $(TESTDIR), $(shell make -s -C $(TESTDIR) get-INCLUDE))
-NAME		=	test-avl
+INCLUDE		+=	$(LIBDIR)/$(LIBSRC)/includes
+NAME		=	libgnl.a
 TARGET		=	$(BINDIR)/$(NAME)
 
 # Compiler options
 CC			=	clang
 LIBFLAGS	=	-L$(BUILDDIR) $(subst lib,-l,$(LIBSRC))
-CFLAGS		=	$(addprefix -I, $(INCLUDE)) -Wall -Wextra -Werror -g
+CFLAGS		=	$(addprefix -I,$(INCLUDE)) -Wall -Wextra -Werror -g
 
 # Color output
 BLACK		=	"\033[0;30m"
@@ -25,10 +25,10 @@ WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
 # Source files
-SRC			=	$(subst $(SRCDIR)/,,$(wildcard $(SRCDIR)/*.c))
+SRC			+=	get_next_line.c
 
 # Libraries
-LIBSRC		+=	
+LIBSRC		+=	libft
 
 OBJECTS		=	$(addprefix $(BUILDDIR)/, $(SRC:%.c=%.o))
 LIBS		=	$(addprefix $(BUILDDIR)/, $(addsuffix .a,$(LIBSRC)))
@@ -36,41 +36,50 @@ LIBS		=	$(addprefix $(BUILDDIR)/, $(addsuffix .a,$(LIBSRC)))
 all: $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
-	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR)
+	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR); true
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo $(GREEN)+++ obj: $(YELLOW)$(@F)$(END)
 
-$(BUILDDIR)/%.a: $(LIBDIR)/% $(LIBDIR)/$(LIBSRC)
-	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR)
-	@make -s -C $< > /dev/null
-	@cp $</$(@F) $@
+$(BUILDDIR)/%.a: $(LIBDIR)/%
+	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR); true
+	@BINDIR=$(CURDIR)/$(BUILDDIR) make -s -C $< > /dev/null
 	@echo $(GREEN)+++ lib: $(CYAN)$(@F)$(END)
 
 $(TARGET): $(LIBS) $(OBJECTS)
-	@$(CC) $(CFLAGS) -o $@ $(OBJECTS) -L$(TESTDIR) -lavl
+	@ar rc $(@) $(OBJECTS)
 	@echo $(GREEN)+++ bin: $(BLUE)$(NAME)$(END)
 
 $(LIBDIR)/$(LIBSRC):
 	@git clone http://github.com/qleguennec/$(@F).git $@
-	@cp $@/includes/$(@F).h $(INCLUDE) 2> /dev/null || true
+	@[ -d $</test ] && rm -rf $</test; true
+	@[ -d $</util ] && rm -rf $</util; true
+	@[ -d $</.git ] && rm -rf $</.git; true
+	@[ -d $</.gitignore ] && rm -rf $</.gitignore; true
+
+.PHONY: deps
+deps: $(LIBDIR)/$(LIBSRC)
 
 .PHONY: clean
 clean:
 	@rm $(LIBS) 2> /dev/null && echo $(RED)--- lib: $(CYAN)$(LIBS:$(BUILDDIR)/%=%)$(END); true
 	@rm $(OBJECTS) 2> /dev/null && echo $(RED)--- obj: $(YELLOW)$(OBJECTS:$(BUILDDIR)/%=%)$(END); true
-	@[ ! "$(ls -A $(BUILDDIR))" ] && rm -r $(BUILDDIR) 2> /dev/null; true
+	@[ "$(find $(BUILDDIR) -maxdepth 0 -empty)" ] || rm -r $(BUILDDIR) 2> /dev/null; true
 
 .PHONY:	fclean
 fclean: clean
 	@rm $(TARGET) 2> /dev/null && echo $(RED)--- bin: $(BLUE)$(NAME)$(END); true
-	@rm $(BINDIR)/$(TESTBIN) 2> /dev/null && echo $(RED)--- bin: $(BLUE)$(NAME)$(END); true
 
 .PHONY: re
 re: fclean all
 
 .PHONY: test
-test: re
-	@./test.sh
+test:
+	@test/test.sh $(ARGS)
+	@test/test-functions-used.sh
+
+.PHONY: rendu
+rendu:
+	@util/rendu.sh
 
 get-%:
 	@echo '$($*)'

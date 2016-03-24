@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. util/rendu.sh
+
 NINPUTS=(1 10 42 100 1000 10000)
 MAX=40000
 
