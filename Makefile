@@ -6,7 +6,7 @@ LIBDIR		?=	$(BUILDDIR)
 DEPSDIR		?=	lib
 INCLUDE		+=	includes
 INCLUDE		+=	$(DEPSDIR)/$(LIBSRC)/includes
-NAME		=	libbst.a
+NAME		=	libgnl.a
 TARGET		=	$(BINDIR)/$(NAME)
 
 # Compiler options
