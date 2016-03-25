@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libavl-internal.h>
+#include <libbst-internal.h>
 #include <get_next_line.h>
 #include <libft.h>
 
@@ -43,7 +43,7 @@ int				main
 {
 	int			cur;
 	char		*line;
-	t_avl_tree	*t;
+	t_bst_tree	*t;
 	size_t		i;
 
 	t = NULL;
@@ -56,11 +56,11 @@ int				main
 	{
 		cur = ft_atoi(line);
 		free(line);
-		avl_insert_elem(&t, (void*)&cur, sizeof(cur), &cmp_int);
+		bst_insert_elem(&t, (void*)&cur, sizeof(cur), &cmp_int);
 	}
 	if (ft_strequ(argv[1], "sort"))
 	{
-		avl_traverse_inorder(t, &print_int);
+		bst_traverse_inorder(t, &print_int);
 		i = 0;
 		while (i < a)
 		{
@@ -72,7 +72,7 @@ int				main
 	}
 	else if (ft_strequ(argv[1], "height"))
 	{
-		ft_putnbr(avl_height(t));
+		ft_putnbr(bst_height(t));
 		ft_putchar('\n');
 	}
 	else

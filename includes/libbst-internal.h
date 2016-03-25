@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libavl-internal.h                                  :+:      :+:    :+:   */
+/*   libbst-internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,26 +18,26 @@
 
 typedef int (*t_cmp) (void*, void*);
 
-typedef struct			s_avl_tree
+typedef struct			s_bst_tree
 {
 	void				*content;
-	struct s_avl_tree	*left;
-	struct s_avl_tree	*right;
-}						t_avl_tree;
+	struct s_bst_tree	*left;
+	struct s_bst_tree	*right;
+}						t_bst_tree;
 
-t_avl_tree				*avl_fromarray
+t_bst_tree				*bst_fromarray
 	(void *arr, size_t length, size_t elem_size, t_cmp f);
-t_avl_tree				*avl_fromlist
+t_bst_tree				*bst_fromlist
 	(t_list *l, t_cmp f);
-t_avl_tree				*avl_new
+t_bst_tree				*bst_new
 	(void *content, size_t content_size);
-void					avl_insert_node
-	(t_avl_tree **t, t_avl_tree *n, t_cmp f);
-void					avl_insert_elem
-	(t_avl_tree **t, void *content, size_t content_size, t_cmp f);
-void					avl_traverse_inorder
-	(t_avl_tree *t, void (*f) (void*));
-int						avl_height
-	(t_avl_tree *t);
+void					bst_insert_node
+	(t_bst_tree **t, t_bst_tree *n, t_cmp f);
+void					bst_insert_elem
+	(t_bst_tree **t, void *content, size_t content_size, t_cmp f);
+void					bst_traverse_inorder
+	(t_bst_tree *t, void (*f) (void*));
+int						bst_height
+	(t_bst_tree *t);
 
 #endif

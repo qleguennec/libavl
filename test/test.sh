@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RENDU_DIR=$(pwd)/test/lib/libavl . util/rendu.sh
+RENDU_DIR=$(pwd)/test/lib/libbst . util/rendu.sh
 make -C test
 if [ "$?" -ne 0 ]; then
 	exit 1
@@ -29,7 +29,7 @@ echo
 for N in ${NINPUTS[@]}; do
 	echo -e "$INFO"Testing for $N bytes input$END
 	RAND=$(openssl rand -out /dev/stdout $N | od -A n -i | tr ' ' '\n' | sed '/^$/d')
-	MY=$(echo "$RAND" | ./test-avl sort)
+	MY=$(echo "$RAND" | ./test-bst sort)
 	SORT=$(echo "$RAND" | sort -n)
 	if [ ! "$MY" = "$SORT" ]; then
 		echo -e "$NOK"input: "\t"$BLUE$RAND$END

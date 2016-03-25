@@ -6,7 +6,7 @@ LIBDIR		?=	$(BUILDDIR)
 DEPSDIR		?=	lib
 INCLUDE		+=	includes
 INCLUDE		+=	$(addprefix $(DEPSDIR)/,$(addsuffix /includes,$(LIBSRC)))
-NAME		=	test-avl
+NAME		=	test-bst
 TARGET		=	$(BINDIR)/$(NAME)
 
 # Compiler options
@@ -29,7 +29,7 @@ END			=	"\033[0m"
 SRC			+=	main.c
 
 # Libraries
-LIBSRC		=	libavl libgnl libft
+LIBSRC		=	libbst libgnl libft
 
 OBJECTS		=	$(addprefix $(BUILDDIR)/, $(SRC:%.c=%.o))
 LIBS		=	$(addprefix $(LIBDIR)/, $(addsuffix .a,$(LIBSRC)))
@@ -37,7 +37,7 @@ LIBS		=	$(addprefix $(LIBDIR)/, $(addsuffix .a,$(LIBSRC)))
 all: deps $(TARGET)
 
 $(LIBDIR)/libgnl.a: $(LIBDIR)/libft.a
-$(LIBDIR)/libavl.a: $(LIBDIR)/libft.a
+$(LIBDIR)/libbst.a: $(LIBDIR)/libft.a
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR); true

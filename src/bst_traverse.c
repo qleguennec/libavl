@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   avl_traverse.c                                     :+:      :+:    :+:   */
+/*   bst_traverse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libavl-internal.h>
+#include <libbst-internal.h>
 
-void			avl_traverse_inorder
-	(t_avl_tree *t, void (*f) (void*))
+void			bst_traverse_inorder
+	(t_bst_tree *t, void (*f) (void*))
 {
 	if (!t)
 		return ;
-	avl_traverse_inorder(t->left, f);
+	bst_traverse_inorder(t->left, f);
 	f(t->content);
-	avl_traverse_inorder(t->right, f);
+	bst_traverse_inorder(t->right, f);
 }
 
-int				avl_height
-	(t_avl_tree *t)
+int				bst_height
+	(t_bst_tree *t)
 {
 	if (!t)
 		return (-1);
-	return (1 + ft_max(avl_height(t->left), avl_height(t->right)));
+	return (1 + ft_max(bst_height(t->left), bst_height(t->right)));
 }

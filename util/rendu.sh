@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$RENDU_DIR" ]; then
-	RENDU_DIR="/tmp/libavl"
+	RENDU_DIR="/tmp/libbst"
 fi
 
 if [ -d "$RENDU_DIR" ]; then

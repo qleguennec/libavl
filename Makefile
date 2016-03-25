@@ -6,7 +6,7 @@ LIBDIR		?=	$(BUILDDIR)
 DEPSDIR		?=	lib
 INCLUDE		+=	includes
 INCLUDE		+=	$(DEPSDIR)/$(LIBSRC)/includes
-NAME		=	libavl.a
+NAME		=	libbst.a
 TARGET		=	$(BINDIR)/$(NAME)
 
 # Compiler options
@@ -26,8 +26,8 @@ WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
 # Source files
-SRC			+=	avl_create.c
-SRC			+=	avl_traverse.c
+SRC			+=	bst_create.c
+SRC			+=	bst_traverse.c
 
 # Libraries
 LIBSRC		=	libft

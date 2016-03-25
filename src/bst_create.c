@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   avl_create.c                                       :+:      :+:    :+:   */
+/*   bst_create.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libavl-internal.h>
+#include <libbst-internal.h>
 
-t_avl_tree			*avl_new
+t_bst_tree			*bst_new
 	(void *content, size_t content_size)
 {
-	t_avl_tree		*new;
+	t_bst_tree		*new;
 
 	if (!(new = ft_memalloc(sizeof(*new))))
 		return (NULL);
@@ -26,10 +26,10 @@ t_avl_tree			*avl_new
 	return (new);
 }
 
-void				avl_insert_node
-	(t_avl_tree **t, t_avl_tree *n, t_cmp f)
+void				bst_insert_node
+	(t_bst_tree **t, t_bst_tree *n, t_cmp f)
 {
-	t_avl_tree		*cur_node;
+	t_bst_tree		*cur_node;
 
 	cur_node = *t;
 	if (!n)
@@ -37,16 +37,16 @@ void				avl_insert_node
 	if (!cur_node)
 		*t = n;
 	else if (f(n->content, cur_node->content) <= 0)
-		avl_insert_node(&cur_node->left, n, f);
+		bst_insert_node(&cur_node->left, n, f);
 	else
-		avl_insert_node(&cur_node->right, n, f);
+		bst_insert_node(&cur_node->right, n, f);
 }
 
-void				avl_insert_elem
-	(t_avl_tree **t, void *content, size_t content_size, t_cmp f)
+void				bst_insert_elem
+	(t_bst_tree **t, void *content, size_t content_size, t_cmp f)
 {
-	t_avl_tree		*new;
+	t_bst_tree		*new;
 
-	new = avl_new(content, content_size);
-	avl_insert_node(t, new, f);
+	new = bst_new(content, content_size);
+	bst_insert_node(t, new, f);
 }
