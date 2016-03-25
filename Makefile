@@ -27,8 +27,8 @@ END			=	"\033[0m"
 
 # Source files
 SRC			+=	bst_create.c
-SRC			+=	bst_traverse.c
 SRC			+=	bst_search.c
+SRC			+=	bst_traverse.c
 
 # Libraries
 LIBSRC		=	libft
@@ -45,7 +45,9 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 $(LIBDIR)/%.a: $(DEPSDIR)/%
 	@[ -d $(BUILDDIR)/$* ] || mkdir -p $(BUILDDIR)/$*; true
-	@BINDIR=$(CURDIR)/$(LIBDIR) BUILDDIR=$(CURDIR)/$(BUILDDIR)/$*	\
+	@										\
+		BINDIR=$(CURDIR)/$(LIBDIR)			\
+		BUILDDIR=$(CURDIR)/$(BUILDDIR)/$*	\
 		make -s -C $< > /dev/null
 	@echo $(GREEN)+++ static lib:'\t'$(END)$(LIBDIR)/'\t'$(CYAN)$(@F)$(END)
 
@@ -57,18 +59,17 @@ $(DEPSDIR)/%:
 	@git clone http://github.com/qleguennec/$(@F).git $@
 	@make -s -C $@ purge
 
-.PHONY: clean fclean clean-all re deps clean-deps re-deps test rendu purge get-%
+.PHONY: clean fclean re deps clean-deps re-deps test rendu purge get-%
 
 clean:
 	@rm $(LIBS) 2> /dev/null &&	\
-		echo $(RED)--- static lib:'\t'$(END)$(LIBDIR)/'\t'$(CYAN)$(LIBS:$(LIBDIR)/%.a=%.a); true
+	echo $(RED)--- static lib:'\t'$(END)$(LIBDIR)/'\t'$(CYAN)$(LIBS:$(LIBDIR)/%.a=%.a); true
 	@rm $(OBJECTS) 2> /dev/null	\
-		&& echo $(RED)--- obj:'\t'$(END)$(BUILDDIR)/'\t'$(YELLOW)$(OBJECTS:$(BUILDDIR)/%=%)$(END); true
-	@[ "$(find $(BUILDDIR) -maxdepth 0 -empty)" ] || rm -r $(BUILDDIR) 2> /dev/null; true
+	&& echo $(RED)--- obj:'\t'$(END)$(BUILDDIR)/'\t'$(YELLOW)$(OBJECTS:$(BUILDDIR)/%=%)$(END); true
 
 fclean: clean
-	@rm $(TARGET) 2> /dev/null \
-		&& echo $(RED)--- target:'\t'$(END)$(BINDIR)'\t'$(BLUE)$(NAME)$(END); true
+	@rm $(TARGET) > /dev/null \
+	&& echo $(RED)--- target:'\t'$(END)$(BINDIR)'\t'$(BLUE)$(NAME)$(END); true
 
 re: fclean all
 
@@ -84,7 +85,7 @@ test:
 	@test/test-functions-used.sh
 
 rendu:
-	@MAKE="all fclean" util/rendu.sh
+	@util/rendu.sh
 
 purge:
 	@util/purge.sh
