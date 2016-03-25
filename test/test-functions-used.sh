@@ -15,14 +15,13 @@ NOK=$RED
 INFO=$CYAN
 
 echo -e $BLUE"Displaying functions used"$END
-make re
-BUILDDIR=$(make -s get-BUILDDIR)
+make -s re > /dev/null
 
 function show {
-	echo "Functions used in $1:"
+	echo -n "$1: "
 	nm $1 | awk '{printf $NF; printf " "}'
 	echo
 }
 
 export -f show
-find $BUILDDIR -maxdepth 1 -type f -name "*.o" -exec bash -c "show {}" \;
+find . -maxdepth 2 -type f -name "*.o" -exec bash -c "show {}" \;

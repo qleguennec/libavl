@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RENDU_DIR=$(pwd)/test/lib/libbst . util/rendu.sh
-make -C test
+make -C test re
 if [ "$?" -ne 0 ]; then
 	exit 1
 fi
@@ -27,20 +27,26 @@ INFO=$CYAN
 echo -e "$INFO"Sort tests$END
 echo
 for N in ${NINPUTS[@]}; do
+	set -e
 	echo -e "$INFO"Testing for $N bytes input$END
 	RAND=$(openssl rand -out /dev/stdout $N | od -A n -i | tr ' ' '\n' | sed '/^$/d')
 	MY=$(echo "$RAND" | ./test-bst sort)
 	SORT=$(echo "$RAND" | sort -n)
+	set +e
 	if [ ! "$MY" = "$SORT" ]; then
 		echo -e "$NOK"input: "\t"$BLUE$RAND$END
 		echo -e "$NOK"output:"\t"$END$MY
 		echo -e "$OK"answer:"\t"$SORT$END
 		exit 1
 	else
+		set -e
 		echo -e "$OK"OK$END
+		echo "$RAND" | ./test-bst size
+		echo "$RAND" | ./test-bst fromarray
+		echo "$RAND" | ./test-bst fromlist
 		echo
 	fi
 done
 
-echo "$OK"OK$END
+echo -e "$OK"ALL OK$END
 exit 0
