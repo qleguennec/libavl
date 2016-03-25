@@ -8,7 +8,7 @@ fi
 cd test
 
 NINPUTS=(1 10 42 100 1000 10000)
-MAX=40000
+MAX=100
 
 BLACK="\033[0;30m"
 RED="\033[0;31m"

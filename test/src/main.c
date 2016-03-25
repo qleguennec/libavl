@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 14:20:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/24 22:36:06 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/03/25 01:00:19 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		cmp_int(void *a, void *b)
 
 	x = (*(int*)a);
 	y = (*(int*)b);
-	return (a - b);
+	return (x - y);
 }
 
 int				main
@@ -44,23 +44,37 @@ int				main
 
 	t = NULL;
 	if (argc != 2)
+	{
+		ft_putendl("must provide function");
 		return (1);
+	}
+	while (get_next_line(0, &line) > 0)
+	{
+		cur = ft_atoi(line);
+		free(line);
+		avl_insert_elem(&t, (void*)&cur, sizeof(cur), &cmp_int);
+	}
 	if (ft_strequ(argv[1], "sort"))
 	{
-		while (get_next_line(0, &line) > 0)
+		avl_traverse_inorder(t, &print_int);
+		i = 0;
+		while (i < a)
 		{
-			cur = ft_atoi(line);
-			free(line);
-			avl_insert_elem(&t, (void*)&cur, sizeof(cur), &cmp_int);
+			ft_putnbr(result[i]);
+			ft_putchar('\n');
+			i++;
 		}
+		ft_bzero(result, 4096);
 	}
-	avl_traverse_inorder(t, &print_int);
-	i = 0;
-	while (i < a)
+	else if (ft_strequ(argv[1], "height"))
 	{
-		ft_putnbr(result[i]);
+		ft_putnbr(avl_height(t));
 		ft_putchar('\n');
-		i++;
+	}
+	else
+	{
+		ft_putstr("unknown function: ");
+		ft_putendl(argv[1]);
 	}
 	return (0);
 }

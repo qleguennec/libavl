@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 13:47:33 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/22 17:11:20 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/03/25 00:59:43 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				avl_insert_node
 		return ;
 	if (!cur_node)
 		*t = n;
-	else if (f(cur_node->content, n->content) <= 0)
+	else if (f(n->content, cur_node->content) <= 0)
 		avl_insert_node(&cur_node->left, n, f);
 	else
 		avl_insert_node(&cur_node->right, n, f);

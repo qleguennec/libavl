@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/22 17:10:38 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/03/25 00:22:37 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void					avl_insert_elem
 	(t_avl_tree **t, void *content, size_t content_size, t_cmp f);
 void					avl_traverse_inorder
 	(t_avl_tree *t, void (*f) (void*));
+int						avl_height
+	(t_avl_tree *t);
 
 #endif
