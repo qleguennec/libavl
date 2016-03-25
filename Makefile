@@ -6,7 +6,7 @@ LIBDIR		?=	$(BUILDDIR)
 DEPSDIR		?=	lib
 INCLUDE		+=	includes
 INCLUDE		+=	$(DEPSDIR)/$(LIBSRC)/includes
-NAME		=	libgnl.a
+NAME		=	libbst.a
 TARGET		=	$(BINDIR)/$(NAME)
 
 # Compiler options
@@ -43,15 +43,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo $(GREEN)+++ obj:'\t'$(END)$(BUILDDIR)/$(YELLOW)'\t'$(@F)$(END)
 
-$(LIBDIR)/%.a: $(DEPSDIR)/%
-	@[ -d $(BUILDDIR)/$* ] || mkdir -p $(BUILDDIR)/$*; true
-	@										\
-		BINDIR=$(CURDIR)/$(LIBDIR)			\
-		BUILDDIR=$(CURDIR)/$(BUILDDIR)/$*	\
-		make -s -C $< > /dev/null
-	@echo $(GREEN)+++ static lib:'\t'$(END)$(LIBDIR)/'\t'$(CYAN)$(@F)$(END)
-
-$(TARGET): $(LIBS) $(OBJECTS)
+$(TARGET): $(DEPSDIR)/$(LIBSRC) $(OBJECTS)
 	@ar rc $(@) $(OBJECTS)
 	@echo $(GREEN)+++ target:'\t'$(END)$(BINDIR)/'\t'$(BLUE)$(NAME)$(END)
 
