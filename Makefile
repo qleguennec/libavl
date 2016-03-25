@@ -67,7 +67,7 @@ clean:
 	@[ "$(find $(BUILDDIR) -maxdepth 0 -empty)" ] || rm -r $(BUILDDIR) 2> /dev/null; true
 
 fclean: clean
-	@rm $(TARGET) > /dev/null \
+	@rm $(TARGET) 2> /dev/null \
 		&& echo $(RED)--- target:'\t'$(END)$(BINDIR)'\t'$(BLUE)$(NAME)$(END); true
 
 re: fclean all
