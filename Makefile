@@ -28,6 +28,7 @@ END			=	"\033[0m"
 # Source files
 SRC			+=	bst_create.c
 SRC			+=	bst_traverse.c
+SRC			+=	bst_search.c
 
 # Libraries
 LIBSRC		=	libft
