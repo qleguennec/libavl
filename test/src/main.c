@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 14:20:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/25 01:00:19 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/03/25 01:55:17 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ static int		cmp_int(void *a, void *b)
 
 	x = (*(int*)a);
 	y = (*(int*)b);
-	return (x - y);
+	if (x > y)
+		return (1);
+	else if (x < y)
+		return (-1);
+	return (0);
 }
 
 int				main

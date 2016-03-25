@@ -27,8 +27,8 @@ INFO=$CYAN
 echo -e "$INFO"Sort tests$END
 echo
 for N in ${NINPUTS[@]}; do
-	echo -e "$INFO"Testing for $N integers$END
-	RAND="$(shuf -i1-$MAX -n $N)"
+	echo -e "$INFO"Testing for $N bytes input$END
+	RAND=$(openssl rand -out /dev/stdout $N | od -A n -i | tr ' ' '\n' | sed '/^$/d')
 	MY=$(echo "$RAND" | ./test-avl sort)
 	SORT=$(echo "$RAND" | sort -n)
 	if [ ! "$MY" = "$SORT" ]; then
