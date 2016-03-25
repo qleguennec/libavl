@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/25 10:11:08 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/03/25 12:04:40 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ size_t					bst_height
 size_t					bst_size
 	(t_bst_tree *t);
 void					*bst_search
+	(t_bst_tree *t, void *elem, t_cmp f);
+int						bst_lookup
 	(t_bst_tree *t, void *elem, t_cmp f);
 
 #endif
