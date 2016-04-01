@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 13:47:33 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/25 09:51:01 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/04/01 16:08:13 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ t_bst_tree			*bst_fromarray
 	i = 0;
 	t = NULL;
 	while (i < length)
-		bst_insert_elem(&t, (void*)(arr + i++), elem_size, f);			
+	{
+		bst_insert_elem(&t, arr, elem_size, f);
+		arr += elem_size;
+		i++;
+	}
 	return (t);
 }
 
