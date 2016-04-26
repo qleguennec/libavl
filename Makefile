@@ -26,9 +26,7 @@ WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
 # Source files
-SRC			+=	bst_create.c
-SRC			+=	bst_traverse.c
-SRC			+=	bst_search.c
+include src.mk
 
 # Libraries
 LIBSRC		+=	libft

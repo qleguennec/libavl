@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/25 12:04:40 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/04/26 14:21:36 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIBAVL_INTERNAL_H
 
 #include <libft.h>
-#include <stdio.h>
 
 typedef int (*t_cmp) (void*, void*);
 
@@ -45,5 +44,6 @@ void					*bst_search
 	(t_bst_tree *t, void *elem, t_cmp f);
 int						bst_lookup
 	(t_bst_tree *t, void *elem, t_cmp f);
+void					bst_delete(t_bst_tree *t);
 
 #endif

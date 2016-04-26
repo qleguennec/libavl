@@ -1,39 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bst_traverse.c                                     :+:      :+:    :+:   */
+/*   bst_delete.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/22 14:17:03 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/04/26 14:15:42 by qle-guen         ###   ########.fr       */
+/*   Created: 2016/04/26 14:16:36 by qle-guen          #+#    #+#             */
+/*   Updated: 2016/04/26 14:17:56 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libbst.h>
+#include <stdlib.h>
 
-void			bst_traverse_inorder
-	(t_bst_tree *t, void (*f) (void*))
-{
-	if (!t)
-		return ;
-	bst_traverse_inorder(t->left, f);
-	f(t->content);
-	bst_traverse_inorder(t->right, f);
-}
-
-size_t			bst_height
+void		bst_delete
 	(t_bst_tree *t)
 {
-	if (!t)
-		return (-1);
-	return (1 + ft_max(bst_height(t->left), bst_height(t->right)));
-}
-
-size_t			bst_size
-	(t_bst_tree *t)
-{
-	if (!t)
-		return (0);
-	return (1 + bst_size(t->left) + bst_size(t->right));
+	free(t->content);
+	free(t);
 }
