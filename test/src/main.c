@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 14:20:47 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/03/25 09:35:08 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/04/26 14:24:30 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static int		result[4096] = {0};
 static t_list	*result_l = NULL;
 static size_t	a = 0;
 
-static void		print_int(void *x)
+static void		print_int(t_bst_tree *t)
 {
 	t_list		*new;
 
 	if (a >= 4096)
 		return ;
-	new = ft_lstnew(x, sizeof(int));
+	new = ft_lstnew(t->content, sizeof(int));
 	ft_lstadd(&result_l, new);
-	result[a++] = (*(int*)x);
+	result[a++] = (*(int*)t->content);
 }
 
 static int		cmp_int(void *a, void *b)

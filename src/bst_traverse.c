@@ -6,19 +6,19 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 14:17:03 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/04/26 14:15:42 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/04/26 14:23:23 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libbst.h>
 
 void			bst_traverse_inorder
-	(t_bst_tree *t, void (*f) (void*))
+	(t_bst_tree *t, void (*f) (t_bst_tree *t))
 {
 	if (!t)
 		return ;
 	bst_traverse_inorder(t->left, f);
-	f(t->content);
+	f(t);
 	bst_traverse_inorder(t->right, f);
 }
 

@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/04/26 14:21:36 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/04/26 14:23:39 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void					bst_insert_node
 void					bst_insert_elem
 	(t_bst_tree **t, void *content, size_t content_size, t_cmp f);
 void					bst_traverse_inorder
-	(t_bst_tree *t, void (*f) (void*));
+	(t_bst_tree *t, void (*f) (t_bst_tree *t));
 size_t					bst_height
 	(t_bst_tree *t);
 size_t					bst_size
