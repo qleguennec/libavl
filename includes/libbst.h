@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libbst-internal.h                                  :+:      :+:    :+:   */
+/*   libbst.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/04/26 14:23:39 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/06/08 20:07:43 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBAVL_INTERNAL_H
-# define LIBAVL_INTERNAL_H
+#ifndef LIBBST_H
+# define LIBBST_H
 
-#include <libft.h>
+# include <libft.h>
 
-typedef int (*t_cmp) (void*, void*);
+typedef int				(*t_cmp) (void*, void*);
 
 typedef struct			s_bst_tree
 {
