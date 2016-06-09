@@ -19,9 +19,9 @@ void			*bst_search
 
 	if (!t)
 		return (NULL);
-	cmp = f(elem, t->content);
+	cmp = f(elem, t->data);
 	if (!cmp)
-		return (t->content);
+		return (t->data);
 	else if (cmp < 0)
 		return (bst_search(t->left, elem, f));
 	else

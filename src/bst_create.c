@@ -13,16 +13,16 @@
 #include <libbst.h>
 
 t_bst_tree			*bst_new
-	(void *content, size_t content_size)
+	(void *data, size_t size)
 {
 	t_bst_tree		*new;
 
 	if (!(new = ft_memalloc(sizeof(*new))))
 		return (NULL);
-	new->content = ft_memalloc(content_size);
-	if (!content)
+	new->data = ft_memalloc(size);
+	if (!data)
 		return (new);
-	ft_memcpy(new->content, content, content_size);
+	ft_memcpy(new->data, data, size);
 	return (new);
 }
 
@@ -36,18 +36,18 @@ void				bst_insert_node
 		return ;
 	if (!cur_node)
 		*t = n;
-	else if (f(n->content, cur_node->content) <= 0)
+	else if (f(n->data, cur_node->data) <= 0)
 		bst_insert_node(&cur_node->left, n, f);
 	else
 		bst_insert_node(&cur_node->right, n, f);
 }
 
 void				bst_insert_elem
-	(t_bst_tree **t, void *content, size_t content_size, t_cmp f)
+	(t_bst_tree **t, void *data, size_t size, t_cmp f)
 {
 	t_bst_tree		*new;
 
-	new = bst_new(content, content_size);
+	new = bst_new(data, size);
 	bst_insert_node(t, new, f);
 }
 
@@ -76,7 +76,7 @@ t_bst_tree			*bst_fromlist
 	ret = NULL;
 	while (l)
 	{
-		bst_insert_elem(&ret, l->content, l->content_size, f);
+		bst_insert_elem(&ret, l->data, l->size, f);
 		l = l->next;
 	}
 	return (ret);

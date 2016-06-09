@@ -16,6 +16,6 @@
 void		bst_delete
 	(t_bst_tree *t)
 {
-	free(t->content);
+	free(t->data);
 	free(t);
 }

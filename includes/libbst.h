@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/06/08 20:07:43 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/06/09 16:11:05 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef int				(*t_cmp) (void*, void*);
 
 typedef struct			s_bst_tree
 {
-	void				*content;
+	void				*data;
 	struct s_bst_tree	*left;
 	struct s_bst_tree	*right;
 }						t_bst_tree;
