@@ -6,8 +6,7 @@ LIBDIR		?=	$(BUILDDIR)
 DEPSDIR		?=	lib
 INCLUDE		+=	includes
 INCLUDE		+=	$(addsuffix /includes,$(LIBS))
-NAME		=	libbst.a
-TARGET		=	$(BINDIR)/$(NAME)
+NAME		=	$(BINDIR)/libbst.a
 
 # Compiler options
 CC			=	clang
@@ -34,14 +33,14 @@ LIBSRC		+=	libft
 OBJECTS		=	$(addprefix $(BUILDDIR)/, $(SRC:%.c=%.o))
 LIBS		=	$(addprefix $(DEPSDIR)/, $(LIBSRC))
 
-all: $(TARGET)
+all: $(NAME)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR); true
 	$(CC) $(CFLAGS) -c $< -o $@
 	@echo $(GREEN)+++ obj:'\t'$(END)$(BUILDDIR)/$(YELLOW)'\t'$(@F)$(END)
 
-$(TARGET): $(LIBS) $(OBJECTS)
+$(NAME): $(LIBS) $(OBJECTS)
 	ar rc $(@) $(OBJECTS)
 	@echo $(GREEN)+++ target:'\t'$(END)$(BINDIR)/'\t'$(BLUE)$(NAME)$(END)
 
@@ -56,7 +55,7 @@ clean:
 	&& echo $(RED)--- obj:'\t'$(END)$(BUILDDIR)/'\t'$(YELLOW)$(OBJECTS:$(BUILDDIR)/%=%)$(END); true
 
 fclean: clean
-	@rm $(TARGET) 2> /dev/null \
+	@rm $(NAME) 2> /dev/null \
 	&& echo $(RED)--- target:'\t'$(END)$(BINDIR)'\t'$(BLUE)$(NAME)$(END); true
 
 re: fclean all
