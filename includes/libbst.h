@@ -6,7 +6,7 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/06/09 16:11:05 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/06/17 21:35:31 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void					*bst_search
 int						bst_lookup
 	(t_bst_tree *t, void *elem, t_cmp f);
 void					bst_delete(t_bst_tree *t);
+void					bst_delall(t_bst_tree **t);
 
 #endif
