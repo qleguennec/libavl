@@ -6,14 +6,14 @@
 /*   By: qle-guen <qle-guen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 22:20:19 by qle-guen          #+#    #+#             */
-/*   Updated: 2016/06/17 21:35:31 by qle-guen         ###   ########.fr       */
+/*   Updated: 2016/06/30 16:20:38 by qle-guen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBBST_H
 # define LIBBST_H
 
-# include <libft.h>
+# include "libft/libft.h"
 
 typedef int				(*t_cmp) (void*, void*);
 

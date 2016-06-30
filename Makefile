@@ -1,17 +1,11 @@
 # Directories
+PROJECT		=	libbst
 BINDIR		?=	.
-SRCDIR		?=	src
 BUILDDIR	?=	build
-LIBDIR		?=	$(BUILDDIR)
-DEPSDIR		?=	lib
-INCLUDE		+=	includes
-INCLUDE		+=	$(addsuffix /includes,$(LIBS))
-NAME		=	libbst.a
-TARGET		=	$(BINDIR)/$(NAME)
+NAME		=	$(BINDIR)/libbst.a
 
 # Compiler options
 CC			=	clang
-LIBFLAGS	=	-L$(LIBDIR) $(subst lib,-l,$(LIBSRC))
 CFLAGS		=	$(addprefix -I,$(INCLUDE)) -Wall -Wextra -Werror -g
 
 # Color output
@@ -25,59 +19,33 @@ CYAN		=	"\033[0;36m"
 WHITE		=	"\033[0;37m"
 END			=	"\033[0m"
 
-# Source files
-include src.mk
-
-# Libraries
-LIBSRC		+=	libft
+SRC += bst_create.c
+SRC += bst_delete.c
+SRC += bst_search.c
+SRC += bst_traverse.c
 
 OBJECTS		=	$(addprefix $(BUILDDIR)/, $(SRC:%.c=%.o))
-LIBS		=	$(addprefix $(DEPSDIR)/, $(LIBSRC))
 
-all: $(TARGET)
+all: $(NAME)
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.c
-	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR); true
+$(BUILDDIR)/%.o: %.c
+	@[ -d $(BUILDDIR) ] || mkdir $(BUILDDIR)
+	@printf $(YELLOW)$(PROJECT)$(END)'\t'
 	$(CC) $(CFLAGS) -c $< -o $@
-	@echo $(GREEN)+++ obj:'\t'$(END)$(BUILDDIR)/$(YELLOW)'\t'$(@F)$(END)
 
-$(TARGET): $(LIBS) $(OBJECTS)
-	ar rc $(@) $(OBJECTS)
-	@echo $(GREEN)+++ target:'\t'$(END)$(BINDIR)/'\t'$(BLUE)$(NAME)$(END)
+$(NAME): $(OBJECTS)
+	@printf $(YELLOW)$(PROJECT)$(END)'\t'
+	@ar rc $(@) $(OBJECTS)
+	@echo OK
 
-$(DEPSDIR)/%:
-	@git clone http://github.com/qleguennec/$(@F).git $@
-	@make -s -C $@ purge
-
-.PHONY: clean fclean re deps clean-deps re-deps test rendu purge get-%
+.PHONY: clean fclean re
 
 clean:
-	@rm $(OBJECTS) 2> /dev/null	\
-	&& echo $(RED)--- obj:'\t'$(END)$(BUILDDIR)/'\t'$(YELLOW)$(OBJECTS:$(BUILDDIR)/%=%)$(END); true
+	@printf $(YELLOW)$(PROJECT)$(END)'\t'
+	rm -rf build/
 
 fclean: clean
-	@rm $(TARGET) 2> /dev/null \
-	&& echo $(RED)--- target:'\t'$(END)$(BINDIR)'\t'$(BLUE)$(NAME)$(END); true
+	@printf $(YELLOW)$(PROJECT)$(END)'\t'
+	rm -rf $(NAME)
 
 re: fclean all
-
-deps: $(LIBS)
-
-clean-deps:
-	@rm -rf $(DEPSDIR)
-
-re-deps: clean-deps deps
-
-test:
-	@test/test.sh $(ARGS)
-	@test/test-functions-used.sh
-
-rendu:
-	@util/rendu.sh
-
-purge:
-	@util/purge.sh
-	@rm -rf util > /dev/null 2>&1 || true
-
-get-%:
-	@echo '$($*)'

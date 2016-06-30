@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libbst.h>
+#include "libbst.h"
 
 void			*bst_search
 	(t_bst_tree *t, void *elem, t_cmp f)

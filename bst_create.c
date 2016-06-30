@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libbst.h>
+#include "libbst.h"
 
 t_bst_tree			*bst_new
 	(void *data, size_t size)
